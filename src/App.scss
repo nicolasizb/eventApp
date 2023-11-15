@@ -1,0 +1,24 @@
+header {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 6rem;
+    padding: 1rem 2rem;
+    background-color:var(--purple-four);
+    z-index: 10;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+
+    .ctr--sgo {        
+        margin: 7rem 0;
+    }
+}
