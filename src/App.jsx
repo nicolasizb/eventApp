@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import Home from './Home.jsx'
-import Error404 from './Error404.jsx'
-import SignOn from './SignOn.jsx'
-import Dashboard from './Dashboard.jsx'
-import Navbar from './Navbar.jsx'
+import Home from './screens/Home/Home.jsx'
+import Error404 from './screens/Error/Error404.jsx'
+import Dashboard from './screens/Dashboard/Dashboard.jsx'
+import SignOn from './screens/SignOn/SignOn.jsx'
+import Navbar from './screens/Navbar/Navbar.jsx'
 
 import './App.scss'
 

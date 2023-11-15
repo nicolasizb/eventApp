@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from './assets/imgs/logo-name-image.png';
+
+import logo from '../../assets/imgs/logo-name-image.png'
 import './home.scss';
 
 const API_URL = 'https://eventhub-navy.vercel.app'
