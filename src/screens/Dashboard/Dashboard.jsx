@@ -1,7 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
+import './dashboard.scss'
 
 export default function Dashboard() {
+  const [restrictedRoute, setRestrictedRoute] = useState()
+
+  useEffect(() => {
+    const id = localStorage.getItem('ID')
+
+    if(!id) {
+      window.location.pathname = "/"
+    }
+  })
+
   return (
-    <div>Dashboard</div>
+    <section>
+      <p>Dashboard</p>
+    </section>
   )
 }

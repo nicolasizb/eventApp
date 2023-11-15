@@ -49,7 +49,7 @@ section {
       input:focus {
         outline: none;
       }
-      .inp--true {
+      .inp--true:focus {
         border-color: var(--color-green); 
       }
       .inp--err {
