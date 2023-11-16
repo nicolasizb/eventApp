@@ -25,7 +25,6 @@ export default function SignOn(props) {
   const handleFileChange = async (e) => {
     try {
       const action = e.target.files[0]
-      console.log(action)
       setFile(action)
     } catch (error) {
       console.error("Error en handleFileChange:", error);
@@ -42,16 +41,18 @@ export default function SignOn(props) {
     })
   }
 
+  const handleButtonClick = () => {
+    document.getElementById('file').click();
+  };
+
   const isValidInfo = newUser.first_name !== '' && newUser.last_name !== '' && /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(newUser.email) && newUser.password !== ''
 
   const uploadFile = async () => {
     if (file) {
-      // Crea un objeto FormData para enviar la imagen
       const formData = new FormData()
       formData.append('filename', file);
 
       try {
-        // Realiza la solicitud POST al servidor
         const response = await fetch(`${props.stateurl}/upload-profile-photo`, {
           method: 'POST',
           body: formData,
@@ -120,13 +121,18 @@ export default function SignOn(props) {
           <img className='logo-image' src={ logo } alt="logo" />
         </Link>
         <form>
-          <label 
-            htmlFor="profile_photo"
-          >Profile photo</label>
           <input 
-            className={`${inputStyle}`}
+            className={`int--file ${inputStyle}`}
+            id="file"
             type="file" 
             onChange={ handleFileChange } 
+          />
+
+          <input 
+            type="button"             
+            className='btnFile'
+            value="Upload profile photo"
+            onClick={handleButtonClick}
           />
 
           <label 

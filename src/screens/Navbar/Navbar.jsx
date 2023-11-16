@@ -32,7 +32,7 @@ export default function Navbar(props) {
             <NavLink className='li' to="/tickets">
               Tickets
             </NavLink>
-            <NavLink className='li' to="/events">
+            <NavLink className='li' to="/create-event">
               Create events
             </NavLink>
             <li className='li' onClick={changeStatus}>

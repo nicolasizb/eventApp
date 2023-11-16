@@ -40,20 +40,35 @@ section {
         background-color: var(--purple-field);
         font-family: var(--font);
         font-size: var(--font-medium);
+
+        &:focus {
+          outline: none;
+        }
       }
       input[type="number"]::-webkit-inner-spin-button,
       input[type="number"]::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
       }
-      input:focus {
-        outline: none;
-      }
       .inp--true:focus {
         border-color: var(--color-green); 
       }
       .inp--err {
         border-color: var(--color-err); 
+      }
+      #file {
+        display: none;
+      }
+      .btnFile {
+        height: 5rem;
+        background-color: var(--purple-four);
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.05) translateX(0);
+        }
       }
       .btn__login {
         margin-top: 2rem;

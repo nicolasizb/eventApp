@@ -4,7 +4,7 @@
     align-items: center;
     max-width: 30rem;
     width: 100%;
-    margin: 8rem;
+    margin: 8rem 0;
 
     .ctr__tt {
         margin-bottom: 2rem;
@@ -14,7 +14,9 @@
     }
     img {
         width: 15rem;
+        height: 15rem;
         border-radius: 50%;
+        object-fit: cover;
     }
     div {
         display: flex;
@@ -33,4 +35,8 @@
             color: var(--purple-four);
         }
     }
+}
+
+@media screen and (max-width: 430px) {
+    
 }

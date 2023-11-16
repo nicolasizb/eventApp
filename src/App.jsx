@@ -7,22 +7,23 @@ import Dashboard from './screens/Dashboard/Dashboard.jsx'
 import SignOn from './screens/SignOn/SignOn.jsx'
 import Navbar from './screens/Navbar/Navbar.jsx'
 import Account from './screens/Account/Account.jsx'
+import CreateEvents from './screens/CreateEvents/CreateEvents.jsx'
 
 import './App.scss'
 
 
 function App() {
-  const [renderNav, setRenderNav] = useState(null)
+  const [renderNav, setRenderNav] = useState(false)
   const [API_URL, setURL] = useState("https://eventhub-navy.vercel.app")
   const [id, setID] = useState(localStorage.getItem('ID'))
 
   useEffect(() => {
     const isValidNav = window.location.pathname
 
-    if(isValidNav !== "/") {
+    if(isValidNav !== "/" && isValidNav !== "/create-account") {
       setRenderNav(true)
     } else {
-      setRenderNav(null)
+      setRenderNav(false)
     }
   }, [])
 
@@ -31,13 +32,14 @@ function App() {
       <BrowserRouter>
         { renderNav && <header><Navbar stateurl={ API_URL } stateid={ id } /></header> }
         <main>
-          <Routes>
-            <Route path="/" element={ <Home /> } />
-            <Route path="/create-account" element={ <SignOn stateurl={ API_URL } /> } />
-            <Route path="/dashboard" element={ <Dashboard stateurl={ API_URL }  /> } />
-            <Route path="/account" element={ <Account stateurl={ API_URL } stateid={ id } /> } ></Route>
-            <Route path="*" element={ <Error404 /> } />
-          </Routes>
+            <Routes>
+              <Route path="/" element={ <Home /> } />
+              <Route path="/account" element={ <Account stateurl={ API_URL } stateid={ id } /> } ></Route>
+              <Route path="/create-account" element={ <SignOn stateurl={ API_URL } /> } />
+              <Route path="/create-event" element={ <CreateEvents stateurl={ API_URL } stateid={ id } /> } ></Route>
+              <Route path="/dashboard" element={ <Dashboard stateurl={ API_URL }  /> } />
+              <Route path="*" element={ <Error404 /> } />
+            </Routes>
         </main>
       </BrowserRouter>
     </React.Fragment> 
