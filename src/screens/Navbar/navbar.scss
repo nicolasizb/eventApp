@@ -3,26 +3,31 @@ nav {
 
     ul {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         width: 100%;    
 
         .li {
+            width: 14rem;
             padding: 0.7rem 1.5rem;
+            text-align: center;
+            list-style: none;
             border-radius: 1.5rem;
             border: 0.2rem solid transparent;
             text-decoration: none;
             font-size: var(--font-medium);
             font-weight: 500;
             color: var(--purple-one);
+            cursor: pointer;
+
+            &.active {
+                background-color: white;
+                color: var(--purple-four);
+            }
         }
         .li:hover {
             border-color: var(--purple-one);
             transition: all ease-in-out .2s;
             transform: scale(1.1) translateX(0);
-        }
-        .li:focus {
-            background-color: var(--purple-one);
-            color: var(--purple-four);
         }
     }
 }

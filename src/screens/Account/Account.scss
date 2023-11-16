@@ -1,0 +1,36 @@
+.ctr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 30rem;
+    width: 100%;
+    margin: 8rem;
+
+    .ctr__tt {
+        margin-bottom: 2rem;
+        font-weight: 500;
+        font-size: 2rem;
+        color: var(--dark);
+    }
+    img {
+        width: 15rem;
+        border-radius: 50%;
+    }
+    div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 1.5rem 0;
+
+        .inf--ti {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        .inf--re {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--purple-four);
+        }
+    }
+}

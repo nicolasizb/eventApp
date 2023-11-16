@@ -1,19 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 import './navbar.scss'  
 
-const API_URL = 'https://eventhub-navy.vercel.app'
+export default function Navbar(props) {
+    const [API_URL, setURL] = useState(props.stateurl)
 
-export default function Navbar() {
-    const id = localStorage.getItem('ID')
-
-    const changeStatus = async () => {
+    async function changeStatus() {
         await fetch(`${API_URL}/log`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: JSON.parse(id),
+                id: JSON.parse(props.stateid),
                 status: false
             })
         })
@@ -25,11 +23,21 @@ export default function Navbar() {
     return (
       <nav>
           <ul>
-              <Link className='li'>Account</Link>
-              <Link className='li'>Tickets</Link>
-              <Link className='li'>Events</Link>
-              <Link className='li'>Add events</Link>
-              <Link className='li' onClick={ changeStatus } >Log out</Link>
+            <NavLink className='li' exact="true" to="/dashboard">
+              Inicio
+            </NavLink>
+            <NavLink className='li' to="/account">
+              Account
+            </NavLink>
+            <NavLink className='li' to="/tickets">
+              Tickets
+            </NavLink>
+            <NavLink className='li' to="/events">
+              Create events
+            </NavLink>
+            <li className='li' onClick={changeStatus}>
+              Log out
+            </li>
           </ul>
       </nav>
     )
