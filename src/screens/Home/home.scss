@@ -2,7 +2,6 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 26rem;
   width: 100%;
 
   div {
@@ -120,4 +119,7 @@ section {
       }
     }
   }
+}
+.ctr--hm, .ctr--sgo {
+  max-width: 28rem;
 }

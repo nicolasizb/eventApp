@@ -45,7 +45,7 @@ export default function SignOn(props) {
     document.getElementById('file').click();
   };
 
-  const isValidInfo = newUser.first_name !== '' && newUser.last_name !== '' && /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(newUser.email) && newUser.password !== ''
+  const isValidInfo = newUser.first_name !== '' && newUser.last_name !== '' && /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(newUser.email) && newUser.password !== '' && file !== null
 
   const uploadFile = async () => {
     if (file) {
@@ -84,26 +84,34 @@ export default function SignOn(props) {
   async function signOn(e) {
     e.preventDefault()
 
-    if(isValidInfo) {
-      const response = await fetch(`${props.stateurl}/sign-on`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newUser)
-      })
-      const data = await response.status
-
-      if(data === 200) {    
-        setSignInSuccess(true)  
-        setTimeout(() => {
-          window.location.pathname = '/'
-        }, 1000) 
-      } else if (data === 400) {
-        setInputStyle('inp--err')
-        setSignInError(true);
+    try {
+      if(file) {
+        if(isValidInfo) {
+          const response = await fetch(`${props.stateurl}/sign-on`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newUser)
+          })
+          const data = await response.status
+    
+          if(data === 200) {    
+            setSignInSuccess(true)  
+            setTimeout(() => {
+              window.location.pathname = '/'
+            }, 1000) 
+          } else if (data === 400) {
+            setInputStyle('inp--err')
+            setSignInError(true);
+          } else {
+            console.error(error)
+          }
+        } else {
+          console.error(error)
+        }
       } else {
-        console.error(error)
+        console.error('No file has been selected');
       }
-    } else {
+    } catch (error) {
       console.error(error)
     }
   }
@@ -111,6 +119,7 @@ export default function SignOn(props) {
   useEffect(() => {
     if (file !== null) {
       uploadFile();
+
     }
   }, [file]);
 
@@ -201,7 +210,7 @@ export default function SignOn(props) {
           {signInSuccess && <p className="tru--msg" >User created</p> }
           {signInError && <p className="err--msg" >User already exists</p> }
           <button className={`btn__login ${ isValidInfo ? 'active' : 'inactive'  }`} 
-          disabled={ !isValidInfo || !file } 
+          disabled={ !isValidInfo } 
           onClick={ signOn }
           >Sign On</button>
         </form>

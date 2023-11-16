@@ -4,8 +4,16 @@ import './CreateEvents.scss'
 
 export default function CreateEvents(props) {
     const [inputStyle, setInputStyle] = useState('inp--true')
-    const [enableBtn, setEnableBtn] = useState(false)
     const [file, setFile] = useState(null)
+    const [createInSuccess, setCreateInSuccess] = useState(false)
+    const [userData, setUserData] = useState({
+      profile_photo: null,
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      dni: null
+    })
     const [newEvent, setNewEvent] = useState({
         picture: "",
         title: "",
@@ -19,7 +27,6 @@ export default function CreateEvents(props) {
     function handleInputChange(e) {
         const {name, value} = e.target
 
-        console.log(newEvent)
         setNewEvent({
             ...newEvent, 
             [name]: value
@@ -33,6 +40,23 @@ export default function CreateEvents(props) {
     function handleFileChange(e) {
         const action = e.target.files[0]
         setFile(action)
+    }
+
+    async function getUser() {
+      try {
+          const response = await fetch(`${props.stateurl}/user/${JSON.parse(props.stateid)}`)
+          const user = await response.json()
+          setUserData(prevUserData => ({
+              ...prevUserData,                
+              profile_photo: user.profile_photo,
+              first_name: user.first_name,
+              last_name: user.last_name,
+              email: user.email,
+              dni: user.dni,
+          }));
+      } catch (error) {
+          console.error(error)
+      }
     }
 
     async function uploadFile() {
@@ -67,53 +91,62 @@ export default function CreateEvents(props) {
             }
         } else {
           console.error('No file has been selected');
-          setEnableBtn(false)
         }
     }
 
-    const validBtn = newEvent.title !== "" && newEvent.date !== "" && newEvent.place !== "" && newEvent.city !== "" && newEvent.cost !== ""
+    const validBtn = newEvent.title !== "" && newEvent.date !== "" && newEvent.place !== "" && newEvent.city !== "" && newEvent.cost !== "" && file !== null
 
     async function createEvent() {
-        try {
-            if(validBtn) {
-                if(file) {
-                    const response = await fetch(`${props.stateurl}/create-event`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(newEvent)
-                    })
-    
-                    if(response.ok) {
-                        console.log(newEvent)
-                    } else {
-                        response.json({
-                            status: 400,
-                            message: "BAD"
-                        })
-                    }
-                } else {
-                    console.error('No file has been selected');
-                    setEnableBtn(false)
-                }
-            } else {
-                console.error('Data incorrect')
-            }
-        } catch (error) {
-            console.error(error)
+      try {
+        if(validBtn) {
+          if(file) {
+              const response = await fetch(`${props.stateurl}/create-event`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(newEvent)
+              })
+              if(response.ok) {
+                  console.log(newEvent)
+                  setCreateInSuccess(true)
+                  setNewEvent({
+                    picture: "",
+                    title: "",
+                    date: "",
+                    place: "",
+                    city: "",
+                    cost: ""
+                  })
+              } else {
+                  response.json({
+                      status: 400,
+                      message: "BAD"
+                  })
+              }
+          } else {
+              console.error('No file has been selected');
+          }
+        } else {
+            console.error('Data incorrect')
         }
+      } catch (error) {
+          console.error(error)
+      }
     }
 
     useEffect(() => {
         if(file !== null) {
             uploadFile()
         } else {
-            setEnableBtn(false)
         }
     }, [file])
 
+    useEffect(() => {
+      getUser()
+    }, [])
+
     return (
       <section className='cre--evn'>
-          <h2>Hi Nicolas!</h2>
+          { userData.first_name && <h2>Hi {userData.first_name}!</h2> }
           <h3>Start creating a new event</h3>
           <div>
               <form action="create-event">
@@ -185,8 +218,9 @@ export default function CreateEvents(props) {
                     <input className='btn-upload' type="button" value="Upload picture here" onClick={ handleBtnFile } />
               </form>
           </div>
+          {createInSuccess && <p className="tru--msg" >Event created</p> }
           <button className={`btn__login btn-cre-evn ${ validBtn && file ? 'active' : 'inactive'  }`}  
-          disabled={ !enableBtn } onClick={ createEvent } >Create event</button>
+          disabled={ !validBtn } onClick={ createEvent } >Create event</button>
       </section>
     )
 }
