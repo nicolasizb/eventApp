@@ -1,0 +1,107 @@
+.cre--evn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 70rem;
+    width: 100%;
+    margin: 6rem 0;
+
+    h2 {
+        width: 100%;
+        text-align: start;
+        margin-bottom: 1rem;
+        font-size: 2.4rem;
+        font-weight: 500;
+        color: var(--dark);
+    }
+    h3 {
+        width: 100%;
+        text-align: start;
+        margin-bottom: 4rem;
+        font-size: 2rem;
+        font-weight: 500;
+        color: var(--purple-two);
+    }
+    div {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 2rem;
+
+        width: 100%;
+
+        form {
+            max-width: 32rem;
+            min-width: 28rem;
+            width: 100%;
+
+            input {
+                width: 100%;
+            }
+            .int--file {
+                display: none;
+            }
+            .btn-upload {
+                height: 4rem;
+                // border: solid 0.2rem var(--purple-four);
+                background-color: var(--light-yellow);
+                color: var(--dark);
+                box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                cursor: pointer;
+        
+                &:hover {
+                  transform: scale(1.05) translateX(0);
+                }
+            }
+        }
+    }
+    .btn-cre-evn {
+        width: 28rem;
+        margin-top: 3rem;
+        padding: 1.5rem 0;
+        background-color: var(--purple-four);
+        border-radius: 1.5rem;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        font-size: 1.8rem;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.05) translateX(0);
+        }     
+    }
+    .btn__login {
+        margin-top: 2rem;
+        width: 100%;           
+        height: 5rem;
+        border-radius: 1rem;
+        font-size: var(--font-big);
+        background-color: var(--purple-four);
+        color: white;
+
+        &:hover:not(.inactive) {
+          border-color: var(--purple-four);
+          background-color: var(--purple-one);
+          font-weight: 600;
+          color: var(--purple-four);
+        }
+
+        &.inactive:disabled {
+          background-color: lightgray;
+          color: darkgray;
+          cursor: not-allowed;
+        }
+    } 
+}
+
+@media screen and (max-width: 700px) {
+    .cre--evn {
+        div {
+            form {
+                max-width: 100%;
+            }
+        }
+    }
+}
