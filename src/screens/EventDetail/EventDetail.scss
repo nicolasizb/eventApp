@@ -1,0 +1,79 @@
+.evt--det {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 95rem;
+    margin: 7rem 0;
+    text-align: start;
+
+    .ico--bck {
+        margin: 0 auto 2rem 0;
+        width: 3rem;
+        height: 3rem;
+        background-image: url(../../assets/icons/arrow_back.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        cursor: pointer;
+    }
+    h3 {
+        width: 100%;
+        text-align: start;
+        margin-bottom: 0.5rem;
+        font-size: 3rem;
+        font-weight: 500;
+        color: var(--dark);
+    }
+    .dd {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: space-between;
+
+        h4 {
+            margin-left: 0.2rem;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--purple-five);
+        }
+        h5 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--dark);
+        }
+    }
+    picture {
+        width: 100%;
+        height: 45rem;
+        margin: 3rem 0;
+        
+        img {
+            border-radius: 1.5rem;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    p {
+        text-align: justify;
+        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+        font-weight: 400;
+        color: var(--dark);
+    }
+    .btn--gtk {
+        margin-top: 2rem;
+        padding: 1.5rem 3rem;
+        border-radius: 1rem;
+        font-size: var(--font-big);
+        background-color: var(--purple-four);
+        color: white;
+
+        &:hover {
+            border: 0.2rem solid var(--purple-two);
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+            transform: scale(1.05) translateX(0);
+        }
+    }
+}

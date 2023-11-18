@@ -17,6 +17,7 @@ export default function CreateEvents(props) {
     const [newEvent, setNewEvent] = useState({
         picture: "",
         title: "",
+        description: "",
         date: "",
         place: "",
         city: "",
@@ -25,12 +26,12 @@ export default function CreateEvents(props) {
     })
 
     function handleInputChange(e) {
-        const {name, value} = e.target
-
-        setNewEvent({
-            ...newEvent, 
-            [name]: value
-        })
+      const {name, value} = e.target
+      
+      setNewEvent({
+        ...newEvent, 
+        [name]: value
+      })
     }
 
     function handleBtnFile() {
@@ -94,7 +95,7 @@ export default function CreateEvents(props) {
         }
     }
 
-    const validBtn = newEvent.title !== "" && newEvent.date !== "" && newEvent.place !== "" && newEvent.city !== "" && newEvent.cost !== "" && file !== null
+    const validBtn = newEvent.title !== "" && newEvent.description !== "" && newEvent.date !== "" && newEvent.place !== "" && newEvent.city !== "" && newEvent.cost !== "" && file !== null
 
     async function createEvent() {
       try {
@@ -111,6 +112,7 @@ export default function CreateEvents(props) {
                   setNewEvent({
                     picture: "",
                     title: "",
+                    description: "",
                     date: "",
                     place: "",
                     city: "",
@@ -216,7 +218,11 @@ export default function CreateEvents(props) {
                       required
                     />
                     <input className='btn-upload' type="button" value="Upload picture here" onClick={ handleBtnFile } />
-              </form>
+              </form>              
+          </div>
+          <div className='ctr--des'>
+            <label htmlFor="description">Description</label>
+            <textarea id="" cols="30" rows="8" name="description" value={ newEvent.description } required placeholder='About the event...' onChange={ handleInputChange } ></textarea>
           </div>
           {createInSuccess && <p className="tru--msg" >Event created</p> }
           <button className={`btn__login btn-cre-evn ${ validBtn && file ? 'active' : 'inactive'  }`}  

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 import './navbar.scss'  
@@ -19,6 +19,12 @@ export default function Navbar(props) {
         localStorage.removeItem('ID')
         window.location.pathname = '/'
     }
+
+    useEffect(() => {
+      if(!props.stateid) {
+        window.location.pathname = "/"
+      }
+    })
 
     return (
       <nav>
