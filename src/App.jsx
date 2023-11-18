@@ -33,15 +33,24 @@ function App() {
       <BrowserRouter>
         { renderNav && <header><Navbar stateurl={ API_URL } stateid={ id } /></header> }
         <main>
-            <Routes>
-              <Route path="/" element={ <Home /> } />
+          {
+            renderNav 
+            ? (
+              <Routes>
               <Route path="/account" element={ <Account stateurl={ API_URL } stateid={ id } /> } ></Route>
-              <Route path="/create-account" element={ <SignOn stateurl={ API_URL } /> } />
               <Route path="/create-event" element={ <CreateEvents stateurl={ API_URL } stateid={ id } /> } ></Route>
               <Route path="/dashboard" element={ <Dashboard stateurl={ API_URL } stateid={ id } /> } />
               <Route path="/event-detail" element={ <EventDetail /> } ></Route>
               <Route path="*" element={ <Error404 /> } />
             </Routes>
+            )
+            : (
+              <Routes>
+                <Route path="/" element={ <Home /> } />
+                <Route path="/create-account" element={ <SignOn stateurl={ API_URL } /> } />
+              </Routes>
+            )
+          }
         </main>    
       </BrowserRouter>
     </React.Fragment> 
