@@ -25,10 +25,6 @@ export default function Dashboard(props) {
   }
 
   useEffect(() => {
-    console.log(eventDetail);
-  }, [eventDetail]);
-
-  useEffect(() => {
     getEvents();
   }, []);
 

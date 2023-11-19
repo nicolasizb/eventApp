@@ -3,12 +3,32 @@ import { useLocation } from 'react-router-dom';
 
 import './EventDetail.scss'
 
-export default function EventDetail() {
+export default function EventDetail(props) {
   const location = useLocation();
   const [eventDetailData, setEventDetailData] = useState(null);
 
   const goToDashboard = () => {
     window.location.pathname = "/dashboard"
+  }
+
+  const createTicket = async () => {
+    const dataID = {
+      userID: JSON.parse(props.stateid),
+      eventID: eventDetailData._id
+    }
+
+    try {
+        const response = await fetch(`${props.stateurl}/create-ticket`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dataID)
+        })
+
+        const server = await response.json()
+        console.log(server)
+    } catch (error) {
+        console.error(error)
+    }
   }
 
   useEffect(() => {
@@ -24,7 +44,7 @@ export default function EventDetail() {
       <div className='dd' >
         <h4>{ eventDetailData ? eventDetailData.date : '' }</h4>
         <h5>{ eventDetailData 
-          ?  eventDetailData.place + ' / ' + eventDetailData.city
+          ?  eventDetailData.place + ' • ' + eventDetailData.city
           : ''
         }</h5>
       </div>
@@ -32,7 +52,7 @@ export default function EventDetail() {
         <img src={ eventDetailData ? eventDetailData.picture : '' } alt="image event detail" />
       </picture>
       <p>{ eventDetailData ? eventDetailData.description : 'eventDetailData' }</p>
-      <button className='btn--gtk' >Get ticket</button>
+      <button className='btn--gtk' onClick={ createTicket } >Get ticket</button>
     </section>
   ) 
 }
